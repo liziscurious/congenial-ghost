@@ -8,28 +8,52 @@ let houseScore = 0;
 console.log('playerScore is ', playerScore);
 console.log('houseScore is ', houseScore);
 
+let currentSuit;
+let currentCard;
+let currentFullCard;
+
 let shortDeck = ['Ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'Jack', 'Queen', 'King'];
 console.log('shortDeck is ', shortDeck);
 
-let deal = () => {
-  console.log(shortDeck[Math.floor(Math.random() * 13)]);
+const dealCard = () => {
+  // console.log(shortDeck[Math.floor(Math.random() * 13)]);
+  currentCard = shortDeck[Math.floor(Math.random() * 13)];
 };
 
-for(let i=0; i <=100; i++) {
-  deal();
+// for(let i=0; i <=100; i++) {
+//   dealCard();
+//   console.log(currentCard);
+// };
+
+// console testing for dealing a random suit
+const suits = ['diamonds', 'hearts', 'clubs', 'spades'];
+
+const dealSuit = () => {
+  // console.log(suits[Math.floor(Math.random() * 4)]);
+  currentSuit = suits[Math.floor(Math.random() * 4)];
+
 };
 
+for(let i=0; i <=10; i++) {
+  dealSuit();
+  console.log(currentSuit);
+};
+
+// console testing for dealing a random card and a random suit
+
+// const deal = () => {
+//   // console.log("You now have a " + dealCard() + " of " + dealSuit());
+//   currentFullCard = [dealCard() + dealSuit()];
+//   console.log(currentFullCard);
+// };
+//
+// deal();
+
+// for(let i=0; i <=100; i++) {
+//   deal();
+// };
 
 
-
-
-
-
-// Stands:
-
-// - What did I work on yesterday
-// - What am I trying to get done today
-// - What is preventing me from getting this done.
 
 
 
