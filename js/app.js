@@ -1,51 +1,16 @@
 console.log("blackjack");
 
 
-// console testing for basic dealing logic
-
-let playerScore = 0;
-let houseScore = 0;
-// console.log('playerScore is ', playerScore);
-// console.log('houseScore is ', houseScore);
-
-let currentSuit;
-let currentCard;
-// let currentFullCard = "blank";
-// console.log(currentFullCard);
-
-// let shortDeck = ['Ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
+// Number array for cards
+const shortDeck = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 // console.log('shortDeck is ', shortDeck);
 
-
-// changed 2-10 to numbers instead of strings
-let shortDeck = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
-console.log('shortDeck is ', shortDeck);
-
-const dealCard = () => {
-  // console.log(shortDeck[Math.floor(Math.random() * 13)]);
-  currentCard = shortDeck[Math.floor(Math.random() * 13)];
-};
-
-// for(let i=0; i <=100; i++) {
-//   dealCard();
-//   console.log(currentCard);
-// };
-
-// console testing for dealing a random suit
+// Suit array for cards
 const suits = ['diamonds', 'hearts', 'clubs', 'spades'];
-
-const dealSuit = () => {
-  // console.log(suits[Math.floor(Math.random() * 4)]);
-  currentSuit = suits[Math.floor(Math.random() * 4)];
-
-};
-
-// for(let i=0; i <=10; i++) {
-//   dealSuit();
-//   // console.log(currentSuit);
-// };
+// console.log('suits are ', suits);
 
 
+// Class to draw a random card with number, suit, and value properties.
 class fullCard {
   constructor(number, suit, value) {
     this.number = shortDeck[Math.floor(Math.random() * 13)];
@@ -67,6 +32,9 @@ class fullCard {
     };
   }
 }
+
+
+// Testing fullCard constructor
 
 const hit1 = new fullCard();
 console.log(hit1);
