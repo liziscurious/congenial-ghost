@@ -2,7 +2,7 @@ console.log("blackjack");
 
 
 // Number array for cards
-const shortDeck = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
+const shortDeck = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 // console.log('shortDeck is ', shortDeck);
 
 // Suit array for cards
