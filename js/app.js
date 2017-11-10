@@ -5,14 +5,20 @@ console.log("blackjack");
 
 let playerScore = 0;
 let houseScore = 0;
-console.log('playerScore is ', playerScore);
-console.log('houseScore is ', houseScore);
+// console.log('playerScore is ', playerScore);
+// console.log('houseScore is ', houseScore);
 
 let currentSuit;
 let currentCard;
-let currentFullCard;
+// let currentFullCard = "blank";
+// console.log(currentFullCard);
 
-let shortDeck = ['Ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'Jack', 'Queen', 'King'];
+// let shortDeck = ['Ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
+// console.log('shortDeck is ', shortDeck);
+
+
+// changed 2-10 to numbers instead of strings
+let shortDeck = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 console.log('shortDeck is ', shortDeck);
 
 const dealCard = () => {
@@ -34,25 +40,36 @@ const dealSuit = () => {
 
 };
 
-for(let i=0; i <=10; i++) {
-  dealSuit();
-  console.log(currentSuit);
-};
-
-// console testing for dealing a random card and a random suit
-
-// const deal = () => {
-//   // console.log("You now have a " + dealCard() + " of " + dealSuit());
-//   currentFullCard = [dealCard() + dealSuit()];
-//   console.log(currentFullCard);
-// };
-//
-// deal();
-
-// for(let i=0; i <=100; i++) {
-//   deal();
+// for(let i=0; i <=10; i++) {
+//   dealSuit();
+//   // console.log(currentSuit);
 // };
 
+
+class fullCard {
+  constructor(number, suit, value) {
+    this.number = shortDeck[Math.floor(Math.random() * 13)];
+    this.suit = suits[Math.floor(Math.random() * 4)];
+    if(this.number === "jack") {
+      this.value = 10;
+    }
+    if(this.number === "queen") {
+      this.value = 10;
+    }
+    if(this.number === "king") {
+      this.value = 10;
+    }
+    if(this.number === "ace") {
+      this.value = 10;
+    }
+    if(this.number >= 2 && this.number <= 10) {
+      this.value = this.number;
+    };
+  }
+}
+
+const hit1 = new fullCard();
+console.log(hit1);
 
 
 
