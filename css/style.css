@@ -1,3 +1,81 @@
-#test {
+/*#test {
   color: red;
+}*/
+
+* {
+  font-family: sans-serif;
+}
+
+#container {
+  /*display: flex;*/
+  background-color: Teal;
+}
+
+#gameplay {
+  background-color: AntiqueWhite;
+  padding: 3em;
+  margin: 3em 6em;
+  flex-grow: 1;
+}
+
+.board {
+  background-color: LightCoral;
+  border: solid 1px black;
+  text-align: center;
+  font-size: 30px;
+  padding: 3px 20px 3px 20px;
+  margin: .5em 2em .5em 2em;
+}
+
+.cards-in-play {
+  background-color: Indigo;
+}
+
+.score {
+  background-color: LightSkyBlue;
+}
+
+#house-cards {
+  background-color: GoldenRod;
+}
+
+#player-cards {
+  background-color: MediumPurple;
+}
+
+#action-btns {
+  background-color: SteelBlue;
+  display: flex;
+  margin: 3em 10em;
+}
+
+.btn {
+  background-color: RosyBrown;
+  text-align: center;
+  flex-grow: 1;
+  margin: 1em 4em 1em 4em;
+  font-size: 20px;
+}
+
+#player-chips {
+  background-color: Thistle;
+  display: flex;
+  margin: 3em 12em;
+}
+
+.chips {
+  background-color: MediumSeaGreen;
+  padding: 2em;
+  flex-grow: 1;
+  margin: 4em;
+  border: 1px dotted black;
+  text-align: center;
+  /*font-size:*/
+}
+
+#house-rules {
+  background-color: MediumVioletRed;
+  font-size: 36px;
+  text-align: center;
+  /*padding: 8px;*/
 }
