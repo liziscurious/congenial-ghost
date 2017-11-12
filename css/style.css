@@ -7,15 +7,17 @@
 }
 
 #container {
-  /*display: flex;*/
+  display: flex;
+  flex-direction: row;
   background-color: Teal;
 }
 
 #gameplay {
   background-color: AntiqueWhite;
-  padding: 3em;
-  margin: 3em 6em;
-  flex-grow: 1;
+  padding: 1em;
+  margin: 0 2em 1em 2em;
+  flex-grow: 2;
+  flex-direction: column;
 }
 
 .board {
@@ -23,16 +25,21 @@
   border: solid 1px black;
   text-align: center;
   font-size: 30px;
-  padding: 3px 20px 3px 20px;
-  margin: .5em 2em .5em 2em;
+  padding: 1em .5em;
+  margin: .5em 10em;
 }
 
 .cards-in-play {
   background-color: Indigo;
+  font-size: 60px;
+  margin: .8em .5em;
+
+
 }
 
 .score {
   background-color: LightSkyBlue;
+  margin: .5em 3em;
 }
 
 #house-cards {
@@ -46,14 +53,15 @@
 #action-btns {
   background-color: SteelBlue;
   display: flex;
-  margin: 3em 10em;
+  margin: 1em 5em;
+  flex-wrap: wrap;
 }
 
 .btn {
   background-color: RosyBrown;
   text-align: center;
   flex-grow: 1;
-  margin: 1em 4em 1em 4em;
+  margin: 1em 4em;
   font-size: 20px;
 }
 
@@ -78,4 +86,9 @@
   font-size: 36px;
   text-align: center;
   /*padding: 8px;*/
+}
+
+#wallet {
+  background-color: blue;
+  flex-grow: 1;
 }
