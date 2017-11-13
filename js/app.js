@@ -37,8 +37,6 @@ $( () => {
   }
 
 
-
-
   // Testing fullCard constructor
 
   const hit1 = new drawCard();
@@ -59,7 +57,10 @@ $( () => {
   console.log(hit7);
   console.log(hit8);
 
-
+  $('#hit').on('click', (event) => {
+    const $hitImg = $('<img>').attr('src', hit1.image)
+    $('#player-cards').append($hitImg);
+  })
 
 
 
