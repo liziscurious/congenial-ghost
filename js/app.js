@@ -42,7 +42,7 @@ $( () => {
   };
 
 
-// Function for initial deal for each game/ hand
+  // Function for initial deal for each game/ hand
   const deal = () => {
     playerHand.push((new drawCard()), (new drawCard()));
     playerScore = (playerHand[0].value + playerHand[1].value);
@@ -60,10 +60,8 @@ $( () => {
     $('#house-score').text(houseScore);
   };
 
-
-
-
-  const hit1 = () => {
+  // Function for hit
+  const hit = () => {
     if (playerScore < 21) {
       playerHand.push(new drawCard());
       playerScore += playerHand[2].value;
@@ -80,12 +78,24 @@ $( () => {
       $('#house-cards').append($houseImg3);
       $('#house-score').text(houseScore);
     }
+  };
+
+
+  // Function for stand, draws new cards for house only if houseScore is below 17
+  const stand = () => {
+    if (houseScore < 17) {
+      houseHand.push(new drawCard());
+      houseScore += houseHand[2].value;
+      console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
+      let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
+      $('#house-cards').append($houseImg3);
+      $('#house-score').text(houseScore);
+    }
   }
 
-
   $('#deal').on('click', deal);
-  $('#hit').on('click', hit1);
-
+  $('#hit').on('click', hit);
+  $('#stand').on('click', stand);
 
 
 
