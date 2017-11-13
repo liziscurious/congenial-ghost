@@ -1,54 +1,70 @@
-console.log("blackjack");
+// console.log("blackjack");
+
+$( () => {
+
+  // Number array for cards
+  const shortDeck = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
+  // console.log('shortDeck is ', shortDeck);
+
+  // Suit array for cards
+  const suits = ['diamonds', 'hearts', 'clubs', 'spades'];
+  // console.log('suits are ', suits);
 
 
-// Number array for cards
-const shortDeck = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
-// console.log('shortDeck is ', shortDeck);
-
-// Suit array for cards
-const suits = ['diamonds', 'hearts', 'clubs', 'spades'];
-// console.log('suits are ', suits);
-
-
-// Class to draw a random card with number, suit, and value properties.
-class fullCard {
-  constructor(number, suit, value) {
-    this.number = shortDeck[Math.floor(Math.random() * 13)];
-    this.suit = suits[Math.floor(Math.random() * 4)];
-    if(this.number === "jack") {
-      this.value = 10;
+  // Class to draw a random card with number, suit, and value properties.
+  class drawCard {
+    constructor(number, suit, value) {
+      this.number = shortDeck[Math.floor(Math.random() * 13)];
+      this.suit = suits[Math.floor(Math.random() * 4)];
+      this.image = 'images/' + this.number + "_of_" + this.suit + '.png';
+      // I referenced http://aaronlipkin.com/blackjack/ for formatting image property to correspond to image file names.
+      if(this.number === "jack") {
+        this.value = 10;
+      }
+      if(this.number === "queen") {
+        this.value = 10;
+      }
+      if(this.number === "king") {
+        this.value = 10;
+      }
+      if(this.number === "ace") {
+        this.value = 10;
+      }
+      if(this.number >= 2 && this.number <= 10) {
+        this.value = this.number;
+      };
     }
-    if(this.number === "queen") {
-      this.value = 10;
-    }
-    if(this.number === "king") {
-      this.value = 10;
-    }
-    if(this.number === "ace") {
-      this.value = 10;
-    }
-    if(this.number >= 2 && this.number <= 10) {
-      this.value = this.number;
-    };
   }
-}
 
 
 
 
-// Testing fullCard constructor
+  // Testing fullCard constructor
 
-const hit1 = new fullCard();
-console.log(hit1);
+  const hit1 = new drawCard();
+  const hit2 = new drawCard();
+  const hit3 = new drawCard();
+  const hit4 = new drawCard();
+  const hit5 = new drawCard();
+  const hit6 = new drawCard();
+  const hit7 = new drawCard();
+  const hit8 = new drawCard();
+
+  console.log(hit1);
+  console.log(hit2);
+  console.log(hit3);
+  console.log(hit4);
+  console.log(hit5);
+  console.log(hit6);
+  console.log(hit7);
+  console.log(hit8);
 
 
 
 
 
 
-
-
-
+});
 
 // Blackjack pseudocode time :)
 
