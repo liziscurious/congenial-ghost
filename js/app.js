@@ -10,6 +10,10 @@ $( () => {
   const suits = ['diamonds', 'hearts', 'clubs', 'spades'];
   // console.log('suits are ', suits);
 
+  let playerHand = [];
+  let houseHand = [];
+
+
 
   // Class to draw a random card with number, suit, and value properties.
   class drawCard {
@@ -28,27 +32,55 @@ $( () => {
         this.value = 10;
       }
       if(this.number === "ace") {
-        this.value = 10;
+        this.value = 11;
       }
       if(this.number >= 2 && this.number <= 10) {
         this.value = this.number;
       };
-    }
+    };
+  };
+
+
+// Function for initial deal for each game/ hand 
+  const deal = () => {
+    playerHand.push((new drawCard()), (new drawCard()));
+    console.log(playerHand);
+    houseHand.push((new drawCard()), (new drawCard()));
+    console.log(houseHand);
   }
+
+  deal();
+
+
+  // let playerScore = 0;
+  // let houseScore = 0;
+  //
+  // playerHand.forEach(value) => {
+  //   playerScore +=;
+  //   console.log(playerScore);
+  // }
+
+
+
+  // for(i=0; i < playerHand.length; i++) {
+  //   let playerScore = playerHand[i].value;
+  //   console.log(playerScore);
+  // };
+
 
 
   // Testing fullCard constructor
 
-  const hit1 = new drawCard();
-  const hit2 = new drawCard();
-  const hit3 = new drawCard();
-  const hit4 = new drawCard();
-  const hit5 = new drawCard();
-  const hit6 = new drawCard();
-  const hit7 = new drawCard();
-  const hit8 = new drawCard();
-  const hit9 = new drawCard();
-  const hit10 = new drawCard();
+  // const hit1 = new drawCard();
+  // const hit2 = new drawCard();
+  // const hit3 = new drawCard();
+  // const hit4 = new drawCard();
+  // const hit5 = new drawCard();
+  // const hit6 = new drawCard();
+  // const hit7 = new drawCard();
+  // const hit8 = new drawCard();
+  // const hit9 = new drawCard();
+  // const hit10 = new drawCard();
 
   // console.log(hit1);
   // console.log(hit2);
@@ -61,37 +93,41 @@ $( () => {
   // console.log(hit9);
   // console.log(hit10);
 
-  let playerScore = 0;
-  let houseScore = 0;
 
-  $('#deal').on('click', (event) => {
-    const $hitImg = $('<img>').attr('src', hit1.image);
-    const $hitImg2 = $('<img>').attr('src', hit2.image);
-    const $hitImg3 = $('<img>').attr('src', hit3.image);
-    const $hitImg4 = $('<img>').attr('src', hit4.image);
-    playerScore = hit1.value + hit2.value;
-    houseScore = hit3.value + hit4.value;
-    console.log('player score is ', playerScore);
-    console.log('house score is ', houseScore);
-    $('#player-cards').append($hitImg, $hitImg2);
-    $('#player-score').text(playerScore);
-    $('#house-cards').append($hitImg3, $hitImg4);
-    $('#house-score').text(houseScore);
 
-  });
 
-  $('#hit').on('click', (event) => {
-    const $hitImg5 = $('<img>').attr('src', hit5.image);
-    const $hitImg6 = $('<img>').attr('src', hit6.image);
-    playerScore += hit5.value;
-    console.log('player score is ', playerScore);
-    houseScore += hit6.value;
-    console.log('house score is ', houseScore);
-    $('#player-cards').append($hitImg5);
-    $('#player-score').text(playerScore);
-    $('#house-cards').append($hitImg6);
-    $('#house-score').text(houseScore);
-  });
+
+
+
+
+  // $('#deal').on('click', (event) => {
+  //   const $hitImg = $('<img>').attr('src', hit1.image);
+  //   const $hitImg2 = $('<img>').attr('src', hit2.image);
+  //   const $hitImg3 = $('<img>').attr('src', hit3.image);
+  //   const $hitImg4 = $('<img>').attr('src', hit4.image);
+  //   playerScore = hit1.value + hit2.value;
+  //   houseScore = hit3.value + hit4.value;
+  //   console.log('player score is ', playerScore);
+  //   console.log('house score is ', houseScore);
+  //   $('#player-cards').append($hitImg, $hitImg2);
+  //   $('#player-score').text(playerScore);
+  //   $('#house-cards').append($hitImg3, $hitImg4);
+  //   $('#house-score').text(houseScore);
+  //
+  // });
+  //
+  // $('#hit').on('click', (event) => {
+  //   const $hitImg5 = $('<img>').attr('src', hit5.image);
+  //   const $hitImg6 = $('<img>').attr('src', hit6.image);
+  //   // playerScore += hit5.value;
+  //   console.log('player score is ', playerScore);
+  //   houseScore += hit6.value;
+  //   console.log('house score is ', houseScore);
+  //   $('#player-cards').append($hitImg5);
+  //   $('#player-score').text(playerScore);
+  //   $('#house-cards').append($hitImg6);
+  //   $('#house-score').text(houseScore);
+  // });
 
 
 
