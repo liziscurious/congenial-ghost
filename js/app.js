@@ -57,10 +57,13 @@ $( () => {
   console.log(hit7);
   console.log(hit8);
 
-  $('#hit').on('click', (event) => {
-    const $hitImg = $('<img>').attr('src', hit1.image)
-    $('#player-cards').append($hitImg);
-  })
+  $('#deal').on('click', (event) => {
+    const $hitImg = $('<img>').attr('src', hit1.image);
+    const $hitImg2 = $('<img>').attr('src', hit2.image);
+    $('#player-cards').append($hitImg, $hitImg2);
+    $('#player-score').text(hit1.value + hit2.value);
+
+  });
 
 
 
