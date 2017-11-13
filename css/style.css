@@ -31,7 +31,7 @@
 
 .cards-in-play {
   background-color: Indigo;
-  font-size: 60px;
+  /*font-size: 60px;*/
   margin: .8em .5em;
 
 
@@ -91,4 +91,9 @@
 #wallet {
   background-color: blue;
   flex-grow: 1;
+}
+
+.cards-in-play img {
+  max-width: 25%;
+  max-height: 25%;
 }
