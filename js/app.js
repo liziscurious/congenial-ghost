@@ -60,8 +60,12 @@ $( () => {
   $('#deal').on('click', (event) => {
     const $hitImg = $('<img>').attr('src', hit1.image);
     const $hitImg2 = $('<img>').attr('src', hit2.image);
+    const $hitImg3 = $('<img>').attr('src', hit3.image);
+    const $hitImg4 = $('<img>').attr('src', hit4.image);
     $('#player-cards').append($hitImg, $hitImg2);
     $('#player-score').text(hit1.value + hit2.value);
+    $('#house-cards').append($hitImg3, $hitImg4);
+    $('#house-score').text(hit3.value + hit4.value);
 
   });
 
