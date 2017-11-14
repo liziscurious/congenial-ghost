@@ -59,6 +59,9 @@ $( () => {
     };
     if (houseScore > 21 && playerScore <= 21) {
       alert("House busts! You win!")
+    };
+    if (playerScore >= 21 && houseScore <= 21) {
+      alert("You bust! House wins!")
     }
     console.log(playerScore);
   }
