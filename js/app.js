@@ -41,9 +41,30 @@ $( () => {
     };
   };
 
+  const cardback = $('<img>').attr('src', 'images/Card-Back-04.png');
 
+  const checkWin = () => {
+    alert('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
+    if (playerScore === 21) {
+      alert("Blackjack! You win!")
+    };
+    if (playerScore <= 20 && houseScore === 21) {
+      alert("House wins. Womp womp.")
+    };
+    if (playerScore === 21 && houseScore === 21) {
+      alert("Push!(Draw) Keep your money for now.")
+    };
+    if (houseScore > 16 && playerScore > houseScore && playerScore <= 21) {
+      alert("You win!")
+    };
+    if (houseScore > 21 && playerScore <= 21) {
+      alert("House busts! You win!")
+    }
+
+  }
   // Function for initial deal for each game/ hand
   const deal = () => {
+    $('.card-back').hide();
     playerHand.push((new drawCard()), (new drawCard()));
     playerScore = (playerHand[0].value + playerHand[1].value);
     let $playerImg1 = $('<img>').attr('src', playerHand[0].image);
@@ -58,6 +79,9 @@ $( () => {
     $('#player-score').text(playerScore);
     $('#house-cards').append($houseImg1, $houseImg2);
     $('#house-score').text(houseScore);
+
+    // alert('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
+    checkWin();
   };
 
   // Function for hit
@@ -69,15 +93,19 @@ $( () => {
       let $playerImg3 = $('<img>').attr('src', playerHand[2].image);
       $('#player-cards').append($playerImg3);
       $('#player-score').text(playerScore);
+    };
 
-    } if (houseScore < 17) {
+    if (houseScore < 17) {
       houseHand.push(new drawCard());
       houseScore += houseHand[2].value;
       console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
       let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
       $('#house-cards').append($houseImg3);
       $('#house-score').text(houseScore);
-    }
+    };
+
+    // alert('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
+    checkWin();
   };
 
 
@@ -90,8 +118,10 @@ $( () => {
       let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
       $('#house-cards').append($houseImg3);
       $('#house-score').text(houseScore);
-    }
-  }
+    };
+    // alert('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
+    checkWin();
+  };
 
   $('#deal').on('click', deal);
   $('#hit').on('click', hit);
