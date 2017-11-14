@@ -60,7 +60,7 @@ $( () => {
     if (houseScore > 21 && playerScore <= 21) {
       alert("House busts! You win!")
     }
-
+    console.log(playerScore);
   }
   // Function for initial deal for each game/ hand
   const deal = () => {
@@ -85,24 +85,67 @@ $( () => {
   };
 
   // Function for hit
+
   const hit = () => {
-    if (playerScore < 21) {
+    if (playerScore < 21 && playerHand.length <= 2) {
       playerHand.push(new drawCard());
       playerScore += playerHand[2].value;
       console.log('newcard is ', playerHand[2].value, ' your score is ', playerScore);
       let $playerImg3 = $('<img>').attr('src', playerHand[2].image);
       $('#player-cards').append($playerImg3);
       $('#player-score').text(playerScore);
+      // console.log('card 4 is ' + playerHand[3].value);
+      // console.log('card 5 is ' + playerHand[4].value);
+      console.log(playerHand);
     };
+
+    // drawing fourth card every time playerHand is under 21. trying to fix
+    // if (playerScore < 21 && playerHand.length == 3) {
+    //   playerHand.push(new drawCard());
+    //   playerScore += playerHand[3].value;
+    //   console.log('newcard is ', playerHand[3].value, ' your score is ', playerScore);
+    //   let $playerImg4 = $('<img>').attr('src', playerHand[3].image);
+    //   $('#player-cards').append($playerImg4);
+    //   $('#player-score').text(playerScore);
+    //   // console.log('card 4 is ' + playerHand[3].value);
+    //   // console.log('card 5 is ' + playerHand[4].value);
+    //   console.log(playerHand);
+    // };
 
     if (houseScore < 17) {
       houseHand.push(new drawCard());
       houseScore += houseHand[2].value;
-      console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
+      // console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
       let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
       $('#house-cards').append($houseImg3);
       $('#house-score').text(houseScore);
+
     };
+
+
+
+
+  // const hit = () => {
+  //   if (playerScore < 21) {
+  //     playerHand.push(new drawCard());
+  //     playerScore += playerHand[2].value;
+  //     // console.log('newcard is ', playerHand[2].value, ' your score is ', playerScore);
+  //     let $playerImg3 = $('<img>').attr('src', playerHand[2].image);
+  //     $('#player-cards').append($playerImg3);
+  //     $('#player-score').text(playerScore);
+  //     // console.log('card 4 is ' + playerHand[3].value);
+  //     // console.log('card 5 is ' + playerHand[4].value);
+  //   };
+  //
+  //   if (houseScore < 17) {
+  //     houseHand.push(new drawCard());
+  //     houseScore += houseHand[2].value;
+  //     // console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
+  //     let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
+  //     $('#house-cards').append($houseImg3);
+  //     $('#house-score').text(houseScore);
+  //
+  //   };
 
     // alert('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
     checkWin();
