@@ -136,8 +136,10 @@ $( () => {
 
     $('#hit2').on('click', hit2);
 
-    checkBlackjack();
-    checkBust();
+    checkAce(playerScore, playerHand);
+    checkAce(houseScore, houseHand);
+    // checkBlackjack();
+    // checkBust();
   };
 
   // drawing fourth card every time playerHand is under 21.
@@ -164,8 +166,10 @@ $( () => {
 
     $('#hit3').on('click', hit3);
 
-    checkBlackjack();
-    checkBust();
+    checkAce(playerScore, playerHand);
+    checkAce(houseScore, houseHand);
+    // checkBlackjack();
+    // checkBust();
   };
 
   // drawing fifth card every time playerHand is under 21.
@@ -177,6 +181,7 @@ $( () => {
       let $playerImg5 = $('<img>').attr('src', playerHand[4].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg5);
       $('#player-score').text(playerScore);
+
     };
 
     if (houseScore < 17) {
@@ -185,8 +190,10 @@ $( () => {
       console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
     };
 
-    checkBlackjack();
-    checkBust();
+    checkAce(playerScore, playerHand);
+    checkAce(houseScore, houseHand);
+    // checkBlackjack();
+    // checkBust();
   };
 
 
@@ -203,17 +210,20 @@ $( () => {
 
     $('#stand').hide();
     let $stand2Div = $('<div>').addClass('btn').attr('id', 'stand2').text('Stand');
-    $('#action-btns').eq(0).append($stand2Div);
+    $('#action-btns').append($stand2Div);
+
+    checkAce(playerScore, playerHand);
+    checkAce(houseScore, houseHand);
 
     // checkWin();
-    checkBlackjack();
-    checkBust();
+    // checkBlackjack();
+    // checkBust();
 
     $('#stand2').on('click', stand2);
   };
 
   const stand2 = () => {
-    if (houseScore < 17 && houseHand.length == 3) {
+    if (houseScore < 17) {
       houseHand.push(new drawCard());
       houseScore += houseHand[3].value;
       console.log('new house card is ', houseHand[3].value, 'house score is ', houseScore);
@@ -222,9 +232,37 @@ $( () => {
       $('#house-score').text(houseScore);
     };
 
-    checkWin();
-    checkBlackjack();
-    checkBust();
+    $('#stand2').hide();
+    let $stand3Div = $('<div>').addClass('btn').attr('id', 'stand3').text('Stand');
+    $('#action-btns').append($stand3Div);
+
+
+    checkAce(playerScore, playerHand);
+    checkAce(houseScore, houseHand);
+
+    // checkWin();
+    // checkBlackjack();
+    // checkBust();
+
+    $('#stand2').on('click', stand3);
+  };
+
+  const stand3 = () => {
+    if (houseScore <17) {
+      houseHand.push(new drawCard());
+      houseScore += houseHand[4].value;
+      console.log('new house card is ', houseHand[4].value, 'house score is ', houseScore);
+      let $houseImg5 = $('<img>').attr('src', houseHand[4].image).addClass("cardsFaceUp");
+      $('#house-cards').append($houseImg5);
+      $('#house-score').text(houseScore);
+    };
+
+    checkAce(playerScore, playerHand);
+    checkAce(houseScore, houseHand);
+
+    // checkWin();
+    // checkBlackjack();
+    // checkBust();
   };
 
 
@@ -244,6 +282,34 @@ $( () => {
   }
 
 
+  // check for presence of an ace in the the hand
+  const checkAce = (currentScore, currentArray) => {
+    // first need to check to see if the score of the hand in question is over 21
+    if (currentScore > 21) {
+      // if hand in question is over 21,
+      console.log(currentScore);
+      for (let i = 0; i < currentArray.length; i++) {
+
+        if (currentArray[i].number === "ace") {
+          // then need to change value of the ace to 1
+          currentScore -= 10;
+          console.log(currentScore);
+          checkBust();
+          checkBlackjack();
+          checkWin();
+        }
+        else {
+          // console.log(currentScore);
+          // checkBust();
+          // checkBlackjack();
+          // checkWin();
+        }
+      };
+
+    };
+  };
+
+
   $('#deal').on('click', deal);
   $('#hit').on('click', hit);
   $('#stand').on('click', stand);
@@ -252,42 +318,3 @@ $( () => {
 
 
 });
-
-// Blackjack pseudocode time :)
-
-// Need to create objects/ object classes for cards in play once randomizations are correct.
-//   Start with one suit, once that's good, then go to one deck
-
-// Look into logic of switch statements for handling of Ace values
-
-//
-
-
-
-
-// Minimum rules to implement for win conditions:
-//   1.  Highest score <= 21 wins
-//   2.  Ace is 1 or 10, depending on what is still <= 21
-//   3.  Facecards all have a point value of 10
-//   4.  Have to be able to start the game after window onload
-//   5.  Must be able to hit or stand
-//   6.  Dealer hits at 16, stands at 17
-//   7.  Card dealing randomization: use Math.floor and Math.random to pick cards.
-//   8.  Test in console or alerts first
-
-
-// Must be worked out for minimum viable product
-//   1.  Bets: deduct bet from wallet for the round
-//   2.  Calculating a draw/ push scenario how that affects bank
-//   3.  Maintain a wallet variable
-//   4.  Hard lose conditions for when wallet gets below zero.
-//   5.  Cannot have a green background
-//   6.  Basic HTML and CSS layout
-
-
-// Stretch:
-//   1.  Create an escrow variable for where the bet goes while in play
-//   2.  Instructions
-//   3.  Split
-//   4.  Double down
-//   5.  Insurance
