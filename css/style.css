@@ -39,7 +39,8 @@
 
 .score {
   background-color: LightSkyBlue;
-  margin: .5em 3em;
+  /*margin: .5em 3em;*/
+  margin-left: auto;
 }
 
 #house-cards {

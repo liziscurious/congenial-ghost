@@ -45,14 +45,19 @@ $( () => {
 
   let playerWins = 0;
   let houseWins = 0;
+  let roundWin = 0;
 
   const checkWin = () => {
     console.log('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
-    if (playerScore === 21) {
+    if (playerScore == 21) {
       playerWins += 1;
       console.log("Blackjack! You win! ", playerWins);
       // alert("Blackjack! You win!");
     };
+    if (houseScore == 21) {
+      houseWins += 1;
+      console.log("House got Blackjack! You lose. Womp womp.");
+    }
     if (playerScore <= 20 && houseScore === 21) {
       houseWins += 1;
       console.log("House wins. Womp womp.", houseWins);
@@ -67,16 +72,16 @@ $( () => {
       console.log("You win! ", playerWins);
       // alert("You win!");
     };
-    if (houseScore > 16 && houseScore > playerScore) {
+    if (houseScore > 16 && houseScore <= 21 && houseScore > playerScore) {
       houseWins += 1;
       console.log("House wins. Womp womp.", houseWins);
     }
-    if (houseScore > 21 && playerScore <= 21) {
+    if (houseScore > 21 && playerScore < 21) {
       playerWins += 1;
       console.log("You win! ", playerWins);
       // alert("House busts! You win!");
     };
-    if (playerScore >= 21 && houseScore <= 21) {
+    if (playerScore > 21 && houseScore <= 21) {
       houseWins += 1;
       console.log("You bust! House wins!", houseWins);
       // alert("You bust! House wins!");
@@ -91,36 +96,19 @@ $( () => {
     playerScore = (playerHand[0].value + playerHand[1].value);
     let $playerImg1 = $('<img>').attr('src', playerHand[0].image);
     let $playerImg2 = $('<img>').attr('src', playerHand[1].image);
-    // console.log('Your score is ', playerScore);
+    console.log('Your score is ', playerScore);
     houseHand.push((new drawCard()), (new drawCard()));
     houseScore = (houseHand[0].value + houseHand[1].value);
     let $houseImg1 = $('<img>').attr('src', houseHand[0].image);
     let $houseImg2 = $('<img>').attr('src', houseHand[1].image);
-    // console.log('House score is ', houseScore);
+    console.log('House score is ', houseScore);
     $('#player-cards').append($playerImg1, $playerImg2);
     $('#player-score').text(playerScore);
     $('#house-cards').append($houseImg1, $houseImg2);
     $('#house-score').text(houseScore);
 
     // alert('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
-    checkWin();
-  };
-
-  // drawing fourth card every time playerHand is under 21. trying to fix
-  const hit2 = () => {
-    if (playerScore < 21 && playerHand.length == 3) {
-      playerHand.push(new drawCard());
-      playerScore += playerHand[3].value;
-      console.log('newcard is ', playerHand[3].value, ' your score is ', playerScore);
-      let $playerImg4 = $('<img>').attr('src', playerHand[3].image);
-      $('#player-cards').append($playerImg4);
-      $('#player-score').text(playerScore);
-      // console.log('card 4 is ' + playerHand[3].value);
-      // console.log('card 5 is ' + playerHand[4].value);
-      console.log(playerHand);
-      $('#hit').hide();
-    };
-    checkWin();
+    // checkWin();
   };
 
   // Function for hit
@@ -135,7 +123,7 @@ $( () => {
       $('#player-score').text(playerScore);
       // console.log('card 4 is ' + playerHand[3].value);
       // console.log('card 5 is ' + playerHand[4].value);
-      console.log(playerHand);
+      // console.log(playerHand);
       $('#hit').hide();
     };
 
@@ -150,6 +138,44 @@ $( () => {
     };
     let $hitAgain = $('<div>').addClass('btn').attr('id', 'hit2').text('Hit Again');
     $('#action-btns').eq(0).append($hitAgain);
+    checkWin();
+  };
+
+  // drawing fourth card every time playerHand is under 21.
+  const hit2 = () => {
+    if (playerScore < 21 && playerHand.length == 3) {
+      playerHand.push(new drawCard());
+      playerScore += playerHand[3].value;
+      console.log('newcard is ', playerHand[3].value, ' your score is ', playerScore);
+      let $playerImg4 = $('<img>').attr('src', playerHand[3].image);
+      $('#player-cards').append($playerImg4);
+      $('#player-score').text(playerScore);
+      // console.log('card 4 is ' + playerHand[3].value);
+      // console.log('card 5 is ' + playerHand[4].value);
+      console.log(playerHand);
+      $('#hit').hide();
+    };
+    let $hitAgain2 = $('<div>').addClass('btn').attr('id', 'hit3').text('Hit  Again');
+    $('#action-btns').eq(0).append($hitAgain2);
+
+    checkWin();
+  };
+
+  // drawing fifth card every time playerHand is under 21. trying to fix
+  const hit3 = () => {
+    if (playerScore < 21 && playerHand.length == 4) {
+      playerHand.push(new drawCard());
+      playerScore += playerHand[4].value;
+      console.log('newcard is ', playerHand[4].value, ' your score is ', playerScore);
+      let $playerImg5 = $('<img>').attr('src', playerHand[4].image);
+      $('#player-cards').append($playerImg5);
+      $('#player-score').text(playerScore);
+      // console.log('card 4 is ' + playerHand[3].value);
+      // console.log('card 5 is ' + playerHand[4].value);
+      console.log(playerHand);
+      $('#hit2').hide();
+
+    };
     checkWin();
   };
 
@@ -185,9 +211,11 @@ $( () => {
 
   $('#deal').on('click', deal);
   $('#hit').on('click', hit);
-  $('#hit-again').on('click', hit2);
+  $('#hit2').on('click', hit2);
+  $('#hit3').on('click', hit3);
   $('#stand').on('click', stand);
   $('#stand2').on('click', stand2);
+
 
 
 
