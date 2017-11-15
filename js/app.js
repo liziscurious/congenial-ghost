@@ -39,8 +39,6 @@ $( () => {
     };
   };
 
-  const cardback = $('<img>').attr('src', 'images/Card-Back-04.png');
-
   let playerWins = 0;
   let houseWins = 0;
   let roundWin = 0;
@@ -49,25 +47,30 @@ $( () => {
     console.log('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
     if (houseScore >16 && playerScore === houseScore) {
       console.log("Push!(Draw) Keep your money for now.");
+      // newHand();
     };
     if (houseScore > 16 && playerScore > houseScore && playerScore <= 21) {
       playerWins += 1;
       console.log("You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
+      // newHand();
     };
     if (houseScore > 16 && houseScore < 21 && houseScore > playerScore) {
       houseWins += 1;
       console.log("House wins. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
-    }
+      // newHand();
+    };
   };
 
   const checkBlackjack = () => {
     if (playerScore == 21 && houseScore < 21) {
       playerWins += 1;
       console.log("Blackjack! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
+      // newHand();
     };
     if (houseScore == 21 && playerScore < 21) {
       houseWins += 1;
       console.log("House got Blackjack! You lose. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
+      // newHand();
     };
   };
 
@@ -75,30 +78,37 @@ $( () => {
     if (houseScore > 21 && playerScore < 21) {
       playerWins += 1;
       console.log("House busts! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
+      // newHand();
     };
     if (playerScore > 21 && houseScore <= 21) {
       houseWins += 1;
       console.log("You bust! House wins! House has ", houseWins, " wins. Player has ", playerWins, " wins.");
+      // newHand();
     };
   }
 
   // Function for initial deal for each game/ hand
   const deal = () => {
+    if (playerHand.length !== 0) {
+      newHand();
+    }
     $('.card-back').hide();
     playerHand.push((new drawCard()), (new drawCard()));
     playerScore = (playerHand[0].value + playerHand[1].value);
-    let $playerImg1 = $('<img>').attr('src', playerHand[0].image);
-    let $playerImg2 = $('<img>').attr('src', playerHand[1].image);
+    let $playerImg1 = $('<img>').attr('src', playerHand[0].image).addClass("cardsFaceUp");
+    let $playerImg2 = $('<img>').attr('src', playerHand[1].image).addClass("cardsFaceUp");
     console.log('Your score is ', playerScore);
     houseHand.push((new drawCard()), (new drawCard()));
     houseScore = (houseHand[0].value + houseHand[1].value);
-    let $houseImg1 = $('<img>').attr('src', houseHand[0].image);
-    let $houseImg2 = $('<img>').attr('src', houseHand[1].image);
+    let $houseImg1 = $('<img>').attr('src', houseHand[0].image).addClass("cardsFaceUp");
+    let $houseImg2 = $('<img>').attr('src', houseHand[1].image).addClass("cardsFaceUp");
     console.log('House score is ', houseScore);
+
     $('#player-cards').append($playerImg1, $playerImg2);
     $('#player-score').text(playerScore);
     $('#house-cards').append($houseImg1, $houseImg2);
     $('#house-score').text(houseScore);
+
     checkBlackjack();
     checkBust();
   };
@@ -108,14 +118,14 @@ $( () => {
       playerHand.push(new drawCard());
       playerScore += playerHand[2].value;
       console.log('newcard is ', playerHand[2].value, ' your score is ', playerScore);
-      let $playerImg3 = $('<img>').attr('src', playerHand[2].image);
+      let $playerImg3 = $('<img>').attr('src', playerHand[2].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg3);
       $('#player-score').text(playerScore);
 
     if (houseScore < 17) {
       houseHand.push(new drawCard());
       houseScore += houseHand[2].value;
-      let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
+      let $houseImg3 = $('<img>').attr('src', houseHand[2].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg3);
       $('#house-score').text(houseScore);
     };
@@ -135,7 +145,7 @@ $( () => {
       playerHand.push(new drawCard());
       playerScore += playerHand[3].value;
       console.log('newcard is ', playerHand[3].value, ' your score is ', playerScore);
-      let $playerImg4 = $('<img>').attr('src', playerHand[3].image);
+      let $playerImg4 = $('<img>').attr('src', playerHand[3].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg4);
       $('#player-score').text(playerScore);
 
@@ -143,7 +153,7 @@ $( () => {
       houseHand.push(new drawCard());
       houseScore += houseHand[3].value;
       console.log('new house card is ', houseHand[3].value, ' house score is ', houseScore);
-      let $houseImg4 = $('<img>').attr('src', houseHand[3].image);
+      let $houseImg4 = $('<img>').attr('src', houseHand[3].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg4);
       $('#house-score').text(houseScore);
     };
@@ -164,7 +174,7 @@ $( () => {
       playerHand.push(new drawCard());
       playerScore += playerHand[4].value;
       console.log('newcard is ', playerHand[4].value, ' your score is ', playerScore);
-      let $playerImg5 = $('<img>').attr('src', playerHand[4].image);
+      let $playerImg5 = $('<img>').attr('src', playerHand[4].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg5);
       $('#player-score').text(playerScore);
     };
@@ -186,16 +196,16 @@ $( () => {
       houseHand.push(new drawCard());
       houseScore += houseHand[2].value;
       console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
-      let $houseImg3 = $('<img>').attr('src', houseHand[2].image);
+      let $houseImg3 = $('<img>').attr('src', houseHand[2].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg3);
       $('#house-score').text(houseScore);
     };
 
     $('#stand').hide();
-    let $stand2Div = $('<div>').addClass('btn').attr('id', 'stand2').text('Standd');
+    let $stand2Div = $('<div>').addClass('btn').attr('id', 'stand2').text('Stand');
     $('#action-btns').eq(0).append($stand2Div);
 
-    checkWin();
+    // checkWin();
     checkBlackjack();
     checkBust();
 
@@ -207,7 +217,7 @@ $( () => {
       houseHand.push(new drawCard());
       houseScore += houseHand[3].value;
       console.log('new house card is ', houseHand[3].value, 'house score is ', houseScore);
-      let $houseImg4 = $('<img>').attr('src', houseHand[3].image);
+      let $houseImg4 = $('<img>').attr('src', houseHand[3].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg4);
       $('#house-score').text(houseScore);
     };
@@ -216,6 +226,22 @@ $( () => {
     checkBlackjack();
     checkBust();
   };
+
+
+  const newHand = () => {
+    playerScore = 0;
+    houseScore = 0;
+    let playerHand = [];
+    let houseHand = [];
+
+    $('.cardsFaceUp').remove();
+    $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+    $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+
+    $('#house-score').text(" ");
+    $('#player-score').text(" ");
+
+  }
 
 
   $('#deal').on('click', deal);
