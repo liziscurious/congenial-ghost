@@ -49,31 +49,55 @@ $( () => {
 
   // Function to place your bets
   const bet5 = () => {
-    if (wallet > 0) {
+    if (wallet >= 0) {
       wallet -= 5;
       pot += 5;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
       $('#game-status').text(" ")
     }
-    if (wallet <= 0) {
-      lose();
-    }
+    if (wallet < 0) {
 
+    }
   };
 
   const bet25 = () => {
-    if (wallet > 0) {
+    if (wallet >= 0) {
       wallet -= 25;
       pot += 25;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    if (wallet <= 0) {
-      lose();
-    }
+    if (wallet < 0) {
 
+    }
+  };
+
+  const bet50 = () => {
+    if (wallet >= 0) {
+      wallet -= 50;
+      pot += 50;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('#game-status').text(" ");
+    }
+    if (wallet < 0) {
+
+    }
+  };
+
+  const bet100 = () => {
+    if (wallet >= 0) {
+      wallet -= 100;
+      pot += 100;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('#game-status').text(" ");
+    }
+    if (wallet < 0) {
+      
+    }
   };
 
 
@@ -84,11 +108,6 @@ $( () => {
       houseScore = 0;
       playerHand = [];
       houseHand = [];
-
-      // for(i=0; i < playerHand.length; i++){
-      //   playerHand.pop(playerHand[i]);
-      //   console.log(playerHand);
-      // }
 
       // new hand reorganization with jQuery
       $('.cardsFaceUp').remove();
@@ -251,8 +270,6 @@ $( () => {
     checkWin();
     checkBlackjack();
     checkBust();
-
-
   };
 
   // second stand function
@@ -276,7 +293,6 @@ $( () => {
     checkWin();
     checkBlackjack();
     checkBust();
-
 
   };
 
@@ -404,7 +420,6 @@ $( () => {
       pot = 0;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
-      // checkLose();
       $('.play-action').remove();
       $('#new-hand').show();
     };
@@ -415,36 +430,32 @@ $( () => {
       pot = 0;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
-      // checkLose();
       $('.play-action').remove();
       $('#new-hand').show();
     };
   };
 
   const lose = () => {
-    // if (wallet <= 0) {
-      $modal.css('display', 'block');
+    wallet = 100;
+    pot = 0;
 
-      wallet = 100;
-      pot = 0;
+    playerHand = [];
+    houseHand = [];
+    playerScore = 0;
+    houseScore = 0;
 
-      playerHand = [];
-      houseHand = [];
-      playerScore = 0;
-      houseScore = 0;
+    playerWins = 0;
+    houseWins = 0;
+    roundWin = 0;
 
-      playerWins = 0;
-      houseWins = 0;
-      roundWin = 0;
-
-      $('#wallet').text(wallet);
-      $closeBtn.on('click', closeModal);
-
-    // }
+    $('#wallet').text(wallet);
   };
 
   $('#bet5').on('click', bet5);
   $('#bet25').on('click', bet25);
+  $('#bet50').on('click', bet50);
+  $('#bet100').on('click', bet100);
+
   $('#new-hand').on('click', newHand);
   $('#hit2').on('click', hit2);
   $('#hit3').on('click', hit3);
