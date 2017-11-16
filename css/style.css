@@ -4,16 +4,22 @@
 
 * {
   font-family: sans-serif;
+  /*background-image: url('https://i.imgur.com/9ESGUa0.jpg');
+  background-size: cover;*/
 }
 
 #container {
   display: flex;
   flex-direction: row;
-  background-color: Teal;
+  justify-content: center;
+  background-image: url('https://i.imgur.com/9ESGUa0.jpg');
+  background-size: cover;
+  /*margin: 0 auto;*/
+  /*background-color: Teal;*/
 }
 
 #gameplay {
-  background-color: AntiqueWhite;
+  /*background-color: AntiqueWhite;*/
   padding: 1em;
   margin: 0 2em 1em 2em;
   flex-grow: 2;
@@ -21,16 +27,17 @@
 }
 
 .board {
-  background-color: LightCoral;
+  /*background-color: LightCoral;*/
   border: solid 1px black;
   text-align: center;
   font-size: 30px;
   padding: 1em .5em;
-  margin: .5em 10em;
+  margin: .5em 13em;
+  border-radius: 12px;
 }
 
 .cards-in-play {
-  background-color: Indigo;
+  /*background-color: Indigo;*/
   /*font-size: 60px;*/
   margin: .8em .5em;
 
@@ -38,36 +45,37 @@
 }
 
 .score {
-  background-color: LightSkyBlue;
+  /*background-color: LightSkyBlue;*/
   /*margin: .5em 3em;*/
   margin-left: auto;
 }
 
 #house-cards {
-  background-color: GoldenRod;
+  /*background-color: GoldenRod;*/
 }
 
 #player-cards {
-  background-color: MediumPurple;
+  /*background-color: MediumPurple;*/
 }
 
 #action-btns {
-  background-color: SteelBlue;
+  /*background-color: SteelBlue;*/
   display: flex;
   margin: 1em 5em;
   flex-wrap: wrap;
 }
 
 .btn {
-  background-color: RosyBrown;
+  background-color: SteelBlue;
   text-align: center;
   flex-grow: 1;
   margin: 1em 4em;
   font-size: 20px;
+  border-radius: 10px;
 }
 
 #player-chips {
-  background-color: Thistle;
+  /*background-color: Thistle;*/
   display: flex;
   margin: 3em 12em;
 }
@@ -79,6 +87,7 @@
   margin: 4em;
   border: 1px dotted black;
   text-align: center;
+  border-radius: 10px;
   /*font-size:*/
 }
 
@@ -86,45 +95,34 @@
   background-color: MediumVioletRed;
   font-size: 36px;
   text-align: center;
-  /*padding: 8px;*/
 }
 
-#wallet {
+.wallet {
   /*background-color: blue;*/
-  flex-grow: 1;
+  /*flex-grow: 1;*/
+  border-style: dotted;
+  padding: 1em;
+  margin: auto;
+  border-radius: 10px;
 }
 
 .cards-in-play img {
   max-width: 18%;
   max-height: 18%;
+  /*border-radius: 10px;*/
+}
+
+#pool {
+  border-style: dotted;
+  padding: 1em;
+  margin: auto;
+  border-radius: 10px;
 }
 
 #game-status {
   text-align: center;
-  background-color: Thistle;
+  /*background-color: Thistle;*/
   margin: 3em 5em;
   padding: 2em;
-}
-
-#modal {
-	background-color: rgba(0,0,0,.4);
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 1;
-	overflow: auto;
-
-	display: none;
-}
-
-#modal-textbox {
-	background-color: white;
-	height: 350px;
-	width: 350px;
-	border-radius: 2px;
-
-	margin: 150px auto;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }

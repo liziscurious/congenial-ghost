@@ -52,24 +52,28 @@ $( () => {
     if (wallet > 0) {
       wallet -= 5;
       pot += 5;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('#game-status').text(" ")
+    }
+    if (wallet <= 0) {
+      lose();
     }
 
-
-    $('#wallet').text(wallet);
-    $('#pot').text(pot);
-    $('#game-status').text(" ")
   };
 
   const bet25 = () => {
     if (wallet > 0) {
       wallet -= 25;
       pot += 25;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('#game-status').text(" ");
+    }
+    if (wallet <= 0) {
+      lose();
     }
 
-
-    $('#wallet').text(wallet);
-    $('#pot').text(pot);
-    $('#game-status').text(" ")
   };
 
 
@@ -189,7 +193,7 @@ $( () => {
     let $hit3Div = $('<div>').addClass('btn').attr('id', 'hit3').text('Hit  Again');
     $('#action-btns').eq(0).append($hit3Div);
 
-    $('#hit3').on('click', hit3);
+
 
     checkAcePlayer();
     checkAceHouse();
@@ -248,7 +252,7 @@ $( () => {
     checkBlackjack();
     checkBust();
 
-    $('#stand2').on('click', stand2);
+
   };
 
   // second stand function
@@ -273,7 +277,7 @@ $( () => {
     checkBlackjack();
     checkBust();
 
-    $('#stand2').on('click', stand3);
+
   };
 
   // third stand function
@@ -392,7 +396,7 @@ $( () => {
   };
 
   const checkBust = () => {
-    if (houseScore > 21 && playerScore < 21) {
+    if (houseScore > 21 && playerScore <= 21) {
       playerWins += 1;
       console.log("House busts! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
       $('#game-status').text("House busts! You win!");
@@ -400,6 +404,7 @@ $( () => {
       pot = 0;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
+      // checkLose();
       $('.play-action').remove();
       $('#new-hand').show();
     };
@@ -410,14 +415,16 @@ $( () => {
       pot = 0;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
+      // checkLose();
       $('.play-action').remove();
       $('#new-hand').show();
     };
   };
 
   const lose = () => {
-    if (wallet < 1) {
-      alert("You lose.");
+    // if (wallet <= 0) {
+      $modal.css('display', 'block');
+
       wallet = 100;
       pot = 0;
 
@@ -429,12 +436,20 @@ $( () => {
       playerWins = 0;
       houseWins = 0;
       roundWin = 0;
+
       $('#wallet').text(wallet);
-    }
+      $closeBtn.on('click', closeModal);
+
+    // }
   };
 
   $('#bet5').on('click', bet5);
   $('#bet25').on('click', bet25);
-  $('#new-hand').on('click', newHand)
+  $('#new-hand').on('click', newHand);
+  $('#hit2').on('click', hit2);
+  $('#hit3').on('click', hit3);
+  $('#stand2').on('click', stand2);
+  $('#stand3').on('click', stand3);
+
 
 });
