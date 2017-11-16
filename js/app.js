@@ -320,7 +320,7 @@ $( () => {
       console.log(playerHand);
     }
 
-
+    // new hand reorganization with jQuery
     $('.cardsFaceUp').remove();
     $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
     $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
@@ -331,18 +331,10 @@ $( () => {
 
     $('#house-score').text(" ");
     $('#player-score').text(" ");
-
   }
-
-
-
-
 
   $('#deal').on('click', deal);
   $('#hit').on('click', hit);
   $('#stand').on('click', stand);
-
-
-
 
 });
