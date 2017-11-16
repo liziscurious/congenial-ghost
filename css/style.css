@@ -98,3 +98,10 @@
   max-width: 18%;
   max-height: 18%;
 }
+
+#game-status {
+  text-align: center;
+  background-color: Thistle;
+  margin: 3em 5em;
+  padding: 2em;
+}
