@@ -29,6 +29,7 @@ $( () => {
       this.suit = suits[Math.floor(Math.random() * 4)];
       this.image = 'images/' + this.number + "_of_" + this.suit + '.png';
       // I referenced http://aaronlipkin.com/blackjack/ for formatting image property to correspond to image file names.
+      // Card art is available under a Creative Commons license from https://opengameart.org/content/playing-cards-0.
       if(this.number === "jack") {
         this.value = 10;
       }
@@ -456,7 +457,7 @@ $( () => {
     $('#wallet').text(wallet);
   };
 
-  // $('#openModal').hide();
+  // Loan modal!
   const $modal = $('#modal');
   const $closeBtn = $('#close');
 
@@ -473,16 +474,11 @@ $( () => {
   $closeBtn.on('click', closeModal);
 
 
+  // Click events
   $('#bet5').on('click', bet5);
   $('#bet25').on('click', bet25);
   $('#bet50').on('click', bet50);
   $('#bet100').on('click', bet100);
-
   $('#new-hand').on('click', newHand);
-  // $('#hit2').on('click', hit2);
-  // $('#hit3').on('click', hit3);
-  // $('#stand2').on('click', stand2);
-  // $('#stand3').on('click', stand3);
-
 
 });
