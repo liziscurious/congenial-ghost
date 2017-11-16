@@ -39,23 +39,14 @@
 .cards-in-play {
   /*background-color: Indigo;*/
   /*font-size: 60px;*/
-  margin: .8em .5em;
-
-
+  /*margin: .8em .5em;*/
+  margin: auto;
 }
 
 .score {
   /*background-color: LightSkyBlue;*/
   /*margin: .5em 3em;*/
   margin-left: auto;
-}
-
-#house-cards {
-  /*background-color: GoldenRod;*/
-}
-
-#player-cards {
-  /*background-color: MediumPurple;*/
 }
 
 #action-btns {
@@ -125,4 +116,27 @@
   margin: 3em 5em;
   padding: 2em;
   border-radius: 10px;
+}
+
+#modal {
+	background-color: rgba(0,0,0,.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	overflow: auto;
+
+	display: none;
+}
+
+#modal-textbox {
+	background-color: white;
+	height: 350px;
+	width: 350px;
+	border-radius: 2px;
+
+	margin: 150px auto;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }

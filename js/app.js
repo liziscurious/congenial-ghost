@@ -49,54 +49,54 @@ $( () => {
 
   // Function to place your bets
   const bet5 = () => {
-    if (wallet >= 0) {
+    if (wallet > 0) {
       wallet -= 5;
       pot += 5;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
       $('#game-status').text(" ")
     }
-    if (wallet < 0) {
-
+    else {
+      $('#openModal').show();
     }
   };
 
   const bet25 = () => {
-    if (wallet >= 0) {
+    if (wallet > 0) {
       wallet -= 25;
       pot += 25;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    if (wallet < 0) {
-
+    else {
+      $('#openModal').show();
     }
   };
 
   const bet50 = () => {
-    if (wallet >= 0) {
+    if (wallet > 0) {
       wallet -= 50;
       pot += 50;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    if (wallet < 0) {
-
+    else {
+      $('#openModal').show();
     }
   };
 
   const bet100 = () => {
-    if (wallet >= 0) {
+    if (wallet > 0) {
       wallet -= 100;
       pot += 100;
       $('#wallet').text(wallet);
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    if (wallet < 0) {
-      
+    else {
+      $('#openModal').show();
     }
   };
 
@@ -451,6 +451,31 @@ $( () => {
     $('#wallet').text(wallet);
   };
 
+
+  const $openBtn = $('#openModal');
+  const $modal = $('#modal');
+  const $closeBtn = $('#close');
+
+  //Event Handler
+  const openModal = () => {
+    // console.log('open modal function!');
+    $modal.css('display', 'block');
+  }
+
+  const closeModal = () => {
+    // console.log('close modal function!');
+    $modal.css('display', 'none');
+    lose();
+  }
+
+  //Event Listners
+  $openBtn.on('click', openModal);
+  $closeBtn.on('click', closeModal);
+  // setTimeout(openModal, 5000);
+  // setTimeout(closeModal, 10000);
+
+
+  $('#openModal').hide();
   $('#bet5').on('click', bet5);
   $('#bet25').on('click', bet25);
   $('#bet50').on('click', bet50);
@@ -461,6 +486,7 @@ $( () => {
   $('#hit3').on('click', hit3);
   $('#stand2').on('click', stand2);
   $('#stand3').on('click', stand3);
+
 
 
 });
