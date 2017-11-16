@@ -8,10 +8,18 @@ $( () => {
   // Suit array for cards
   const suits = ['diamonds', 'hearts', 'clubs', 'spades'];
 
+
+  let wallet = 100;
+  let pot = 0;
+
   let playerHand = [];
   let houseHand = [];
   let playerScore = 0;
   let houseScore = 0;
+
+  let playerWins = 0;
+  let houseWins = 0;
+  let roundWin = 0;
 
 
   // Class to draw a random card with number, suit, and value properties.
@@ -39,97 +47,49 @@ $( () => {
     };
   };
 
-  let playerWins = 0;
-  let houseWins = 0;
-  let roundWin = 0;
+  // Function to place your bets
+  const bet5 = () => {
+    wallet -= 5;
+    pot += 5;
 
-  // Checking for win conditions
+    $('#wallet').text(wallet);
+    $('#pot').text(pot);
+    $('#new-hand').on('click', newHand)
+  }
 
-  // check for presence of an ace in the the player's hand
-  const checkAcePlayer = () => {
-    // first need to check to see if the score of the hand in question is over 21
-    if (playerScore > 21) {
-      // if hand in question is over 21,
-      // console.log(playerScore);
-      for (let i = 0; i < playerHand.length; i++) {
+  // Function to start new hand
+  const newHand = () => {
+    playerScore = 0;
+    houseScore = 0;
+    let playerHand = [];
+    let houseHand = [];
 
-        if (playerHand[i].number === "ace") {
-          // then need to change value of the ace to 1
-          playerScore -= 10;
-          // console.log(playerScore);
-        }
-        else {
-          // console.log(playerScore);
-        }
-      };
-    };
-  };
+    for(i=0; i < playerHand.length; i++){
+      playerHand.pop(playerHand[i]);
+      console.log(playerHand);
+    }
 
-  // check for presence of an ace in the the house's hand
-  const checkAceHouse = () => {
-    if (houseScore > 21) {
-      // console.log(houseScore);
-      for (let i = 0; i < houseHand.length; i++) {
-        if (houseHand[i].number === "ace") {
-          houseScore -= 10;
-          // console.log(houseScore);
-        }
-        else {
-          // console.log(houseScore);
-        }
-      };
-    };
-  };
+    // new hand reorganization with jQuery
+    $('.cardsFaceUp').remove();
+    $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+    $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
 
-  const checkWin = () => {
-    console.log('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
-    if (houseScore >16 && playerScore === houseScore) {
-      console.log("Push!(Draw) Keep your money for now.");
-      $('#game-status').text("Push!(Draw) Keep your money for now.");
-      // newHand();
-    };
-    if (houseScore > 16 && playerScore > houseScore && playerScore <= 21) {
-      playerWins += 1;
-      console.log("You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
-      $('#game-status').text("You win!");
-      // newHand();
-    };
-    if (houseScore > 16 && houseScore < 21 && houseScore > playerScore) {
-      houseWins += 1;
-      console.log("House wins. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
-      $('#game-status').text("House wins. Womp womp.");
-      // newHand();
-    };
-  };
+    $('.btn').hide();
+    const $deal = $('<div>').addClass("btn").attr("id", "deal").text("Deal");
+    $('#action-btns').append($deal);
+    const $hit = $('<div>').addClass("btn").attr("id", "hit").text("Hit");
+    $('#action-btns').append($hit);
+    const $stand = $('<div>').addClass("btn").attr("id", "stand").text("Stand");
+    $('#action-btns').append($stand);
 
-  const checkBlackjack = () => {
-    if (playerScore == 21 && houseScore < 21) {
-      playerWins += 1;
-      console.log("Blackjack! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
-      $('#game-status').text("Blackjack! You win!");
-      // newHand();
-    };
-    if (houseScore == 21 && playerScore < 21) {
-      houseWins += 1;
-      console.log("House got Blackjack! You lose. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
-      $('#game-status').text("House got Blackjack! You lose. Womp womp. House has ");
-      // newHand();
-    };
-  };
 
-  const checkBust = () => {
-    if (houseScore > 21 && playerScore < 21) {
-      playerWins += 1;
-      console.log("House busts! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
-      $('#game-status').text("House busts! You win!");
-      // newHand();
-    };
-    if (playerScore > 21 && houseScore <= 21) {
-      houseWins += 1;
-      console.log("You bust! House wins! House has", houseWins, " wins. Player has ", playerWins, " wins.");
-      $('#game-status').text("You bust! House wins!");
-      // newHand();
-    };
+
+    $('#house-score').text(" ");
+    $('#player-score').text(" ");
+
+    $('#deal').on('click', deal);
+    $('#hit').on('click', hit);
+    $('#stand').on('click', stand);
   };
 
   // Function for initial deal for each game/ hand
@@ -154,6 +114,8 @@ $( () => {
     $('#player-score').text(playerScore);
     $('#house-cards').append($houseImg1, $houseImg2);
     $('#house-score').text(houseScore);
+
+    $('#new-hand').hide();
 
     checkBlackjack();
     checkBust();
@@ -315,33 +277,95 @@ $( () => {
     checkBust();
   };
 
+  // Checking for win conditions
+  // check for presence of an ace in the the player's hand
+  const checkAcePlayer = () => {
+    // first need to check to see if the score of the hand in question is over 21
+    if (playerScore > 21) {
+      // if hand in question is over 21,
+      // console.log(playerScore);
+      for (let i = 0; i < playerHand.length; i++) {
 
-  const newHand = () => {
-    playerScore = 0;
-    houseScore = 0;
-    let playerHand = [];
-    let houseHand = [];
+        if (playerHand[i].number === "ace") {
+          // then need to change value of the ace to 1
+          playerScore -= 10;
+          // console.log(playerScore);
+        }
+        else {
+          // console.log(playerScore);
+        }
+      };
+    };
+  };
 
-    for(i=0; i < playerHand.length; i++){
-      playerHand.pop(playerHand[i]);
-      console.log(playerHand);
-    }
+  // check for presence of an ace in the the house's hand
+  const checkAceHouse = () => {
+    if (houseScore > 21) {
+      // console.log(houseScore);
+      for (let i = 0; i < houseHand.length; i++) {
+        if (houseHand[i].number === "ace") {
+          houseScore -= 10;
+          // console.log(houseScore);
+        }
+        else {
+          // console.log(houseScore);
+        }
+      };
+    };
+  };
 
-    // new hand reorganization with jQuery
-    $('.cardsFaceUp').remove();
-    $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
-    $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+  const checkWin = () => {
+    console.log('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
+    if (houseScore >16 && playerScore === houseScore) {
+      console.log("Push!(Draw) Keep your money for now.");
+      $('#game-status').text("Push!(Draw) Keep your money for now.");
+      // newHand();
+    };
+    if (houseScore > 16 && playerScore > houseScore && playerScore <= 21) {
+      playerWins += 1;
+      console.log("You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
+      $('#game-status').text("You win!");
+      // newHand();
+    };
+    if (houseScore > 16 && houseScore < 21 && houseScore > playerScore) {
+      houseWins += 1;
+      console.log("House wins. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
+      $('#game-status').text("House wins. Womp womp.");
+      // newHand();
+    };
+  };
 
-    $('#action-btns').empty();
-    const $hit = $('<div>').addClass("btn").attr("id", "btn").text("hit");
-    $('#action-btns').append($hit);
+  const checkBlackjack = () => {
+    if (playerScore == 21 && houseScore < 21) {
+      playerWins += 1;
+      console.log("Blackjack! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
+      $('#game-status').text("Blackjack! You win!");
+      // newHand();
+    };
+    if (houseScore == 21 && playerScore < 21) {
+      houseWins += 1;
+      console.log("House got Blackjack! You lose. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
+      $('#game-status').text("House got Blackjack! You lose. Womp womp.");
+      // newHand();
+    };
+  };
 
-    $('#house-score').text(" ");
-    $('#player-score').text(" ");
-  }
+  const checkBust = () => {
+    if (houseScore > 21 && playerScore < 21) {
+      playerWins += 1;
+      console.log("House busts! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
+      $('#game-status').text("House busts! You win!");
+      // newHand();
+    };
+    if (playerScore > 21 && houseScore <= 21) {
+      houseWins += 1;
+      console.log("You bust! House wins! House has", houseWins, " wins. Player has ", playerWins, " wins.");
+      $('#game-status').text("You bust! House wins!");
+      // newHand();
+    };
+  };
 
-  $('#deal').on('click', deal);
-  $('#hit').on('click', hit);
-  $('#stand').on('click', stand);
+  $('#bet5').on('click', bet5);
+
 
 });
