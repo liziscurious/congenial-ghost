@@ -179,10 +179,8 @@ $( () => {
     };
 
     $('#hit').hide();
-    let $hit2Div = $('<div>').addClass('btn').attr('id', 'hit2').text('Hit Again');
+    let $hit2Div = $('<div>').addClass('btn').addClass("play-action").attr('id', 'hit2').text('Hit Again');
     $('#action-btns').eq(0).append($hit2Div);
-
-    $('#hit2').on('click', hit2);
 
     checkAcePlayer();
     checkAceHouse();
@@ -191,6 +189,8 @@ $( () => {
 
     checkBlackjack();
     checkBust();
+
+    $('#hit2').on('click', hit2);
   };
 
   // drawing fourth card every time playerHand is under 21.
@@ -210,10 +210,8 @@ $( () => {
     };
 
     $('#hit2').hide();
-    let $hit3Div = $('<div>').addClass('btn').attr('id', 'hit3').text('Hit  Again');
+    let $hit3Div = $('<div>').addClass('btn').addClass("play-action").attr('id', 'hit3').text('Hit  Again');
     $('#action-btns').eq(0).append($hit3Div);
-
-
 
     checkAcePlayer();
     checkAceHouse();
@@ -222,6 +220,8 @@ $( () => {
 
     checkBlackjack();
     checkBust();
+
+    $('#hit3').on('click', hit3);
   };
 
   // drawing fifth card every time playerHand is under 21.
@@ -261,7 +261,7 @@ $( () => {
     };
 
     $('#stand').hide();
-    let $stand2Div = $('<div>').addClass('btn').attr('id', 'stand2').text('Stand');
+    let $stand2Div = $('<div>').addClass('btn').addClass("play-action").attr('id', 'stand2').text('Stand');
     $('#action-btns').append($stand2Div);
 
     checkAcePlayer();
@@ -271,6 +271,8 @@ $( () => {
     checkWin();
     checkBlackjack();
     checkBust();
+
+    $('#stand2').on('click', stand2);
   };
 
   // second stand function
@@ -284,7 +286,7 @@ $( () => {
     };
 
     $('#stand2').hide();
-    let $stand3Div = $('<div>').addClass('btn').attr('id', 'stand3').text('Stand');
+    let $stand3Div = $('<div>').addClass('btn').addClass("play-action").attr('id', 'stand3').text('Stand');
     $('#action-btns').append($stand3Div);
 
     checkAcePlayer();
@@ -295,6 +297,7 @@ $( () => {
     checkBlackjack();
     checkBust();
 
+    $('#stand3').on('click', stand3);
   };
 
   // third stand function
@@ -385,9 +388,6 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-      if (wallet = 0) {
-        $('#openModal').show();
-      }
     }
   };
 
@@ -412,9 +412,6 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-      if (wallet = 0) {
-        $('#openModal').show();
-      }
     };
   };
 
@@ -440,9 +437,6 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-      if (wallet = 0) {
-        $('#openModal').show();
-       }
     }
   };
 
@@ -462,8 +456,7 @@ $( () => {
     $('#wallet').text(wallet);
   };
 
-  $('#openModal').hide();
-  const $openBtn = $('#openModal');
+  // $('#openModal').hide();
   const $modal = $('#modal');
   const $closeBtn = $('#close');
 
@@ -476,9 +469,8 @@ $( () => {
     lose();
   }
 
-  $openBtn.on('click', openModal);
+  $('#openModal').on('click', openModal);
   $closeBtn.on('click', closeModal);
-
 
 
   $('#bet5').on('click', bet5);
@@ -487,10 +479,10 @@ $( () => {
   $('#bet100').on('click', bet100);
 
   $('#new-hand').on('click', newHand);
-  $('#hit2').on('click', hit2);
-  $('#hit3').on('click', hit3);
-  $('#stand2').on('click', stand2);
-  $('#stand3').on('click', stand3);
+  // $('#hit2').on('click', hit2);
+  // $('#hit3').on('click', hit3);
+  // $('#stand2').on('click', stand2);
+  // $('#stand3').on('click', stand3);
 
 
 });
