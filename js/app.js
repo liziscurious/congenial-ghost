@@ -121,14 +121,12 @@ $( () => {
       console.log('newcard is ', playerHand[2].value, ' your score is ', playerScore);
       let $playerImg3 = $('<img>').attr('src', playerHand[2].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg3);
-      $('#player-score').text(playerScore);
 
     if (houseScore < 17) {
       houseHand.push(new drawCard());
       houseScore += houseHand[2].value;
       let $houseImg3 = $('<img>').attr('src', houseHand[2].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg3);
-      $('#house-score').text(houseScore);
     };
 
     $('#hit').hide();
@@ -139,6 +137,9 @@ $( () => {
 
     checkAcePlayer();
     checkAceHouse();
+    $('#player-score').text(playerScore);
+    $('#house-score').text(houseScore);
+
     checkBlackjack();
     checkBust();
   };
@@ -150,7 +151,6 @@ $( () => {
       console.log('newcard is ', playerHand[3].value, ' your score is ', playerScore);
       let $playerImg4 = $('<img>').attr('src', playerHand[3].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg4);
-      $('#player-score').text(playerScore);
 
     if (houseScore < 17) {
       houseHand.push(new drawCard());
@@ -158,7 +158,6 @@ $( () => {
       console.log('new house card is ', houseHand[3].value, ' house score is ', houseScore);
       let $houseImg4 = $('<img>').attr('src', houseHand[3].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg4);
-      $('#house-score').text(houseScore);
     };
 
     $('#hit2').hide();
@@ -169,6 +168,9 @@ $( () => {
 
     checkAcePlayer();
     checkAceHouse();
+    $('#player-score').text(playerScore);
+    $('#house-score').text(houseScore);
+
     checkBlackjack();
     checkBust();
   };
@@ -181,8 +183,6 @@ $( () => {
       console.log('newcard is ', playerHand[4].value, ' your score is ', playerScore);
       let $playerImg5 = $('<img>').attr('src', playerHand[4].image).addClass("cardsFaceUp");
       $('#player-cards').append($playerImg5);
-      $('#player-score').text(playerScore);
-
     };
 
     if (houseScore < 17) {
@@ -193,6 +193,9 @@ $( () => {
 
     checkAcePlayer();
     checkAceHouse();
+    $('#player-score').text(playerScore);
+    $('#house-score').text(houseScore);
+
     checkBlackjack();
     checkBust();
   };
@@ -206,7 +209,6 @@ $( () => {
       console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
       let $houseImg3 = $('<img>').attr('src', houseHand[2].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg3);
-      $('#house-score').text(houseScore);
     };
 
     $('#stand').hide();
@@ -215,6 +217,8 @@ $( () => {
 
     checkAcePlayer();
     checkAceHouse();
+    $('#house-score').text(houseScore);
+
     checkWin();
     checkBlackjack();
     checkBust();
@@ -229,7 +233,6 @@ $( () => {
       console.log('new house card is ', houseHand[3].value, 'house score is ', houseScore);
       let $houseImg4 = $('<img>').attr('src', houseHand[3].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg4);
-      $('#house-score').text(houseScore);
     };
 
     $('#stand2').hide();
@@ -238,6 +241,8 @@ $( () => {
 
     checkAcePlayer();
     checkAceHouse();
+    $('#house-score').text(houseScore);
+
     checkWin();
     checkBlackjack();
     checkBust();
@@ -252,11 +257,12 @@ $( () => {
       console.log('new house card is ', houseHand[4].value, 'house score is ', houseScore);
       let $houseImg5 = $('<img>').attr('src', houseHand[4].image).addClass("cardsFaceUp");
       $('#house-cards').append($houseImg5);
-      $('#house-score').text(houseScore);
     };
 
     checkAcePlayer();
     checkAceHouse();
+    $('#house-score').text(houseScore);
+
     checkWin();
     checkBlackjack();
     checkBust();
