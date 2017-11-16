@@ -56,9 +56,9 @@ $( () => {
       $('#pot').text(pot);
       $('#game-status').text(" ")
     }
-    else {
-      $('#openModal').show();
-    }
+    // else {
+    //   $modal.show();
+    // }
   };
 
   const bet25 = () => {
@@ -69,9 +69,9 @@ $( () => {
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    else {
-      $('#openModal').show();
-    }
+    // else {
+    //   $modal.show();
+    // }
   };
 
   const bet50 = () => {
@@ -82,9 +82,9 @@ $( () => {
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    else {
-      $('#openModal').show();
-    }
+    // else {
+    //   $modal.show();
+    // }
   };
 
   const bet100 = () => {
@@ -95,9 +95,9 @@ $( () => {
       $('#pot').text(pot);
       $('#game-status').text(" ");
     }
-    else {
-      $('#openModal').show();
-    }
+    // else {
+    //   $modal.show();
+    // }
   };
 
 
@@ -384,6 +384,9 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
+      if (wallet <== 0) {
+        $modal.show();
+      }
     };
   };
 
@@ -408,6 +411,9 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
+      if (wallet <== 0) {
+        $modal.show();
+      }
     };
   };
 
@@ -432,6 +438,9 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
+      if (wallet <== 0) {
+        $modal.show();
+      }
     };
   };
 
@@ -451,31 +460,25 @@ $( () => {
     $('#wallet').text(wallet);
   };
 
-
+  $('#openModal').hide();
   const $openBtn = $('#openModal');
   const $modal = $('#modal');
   const $closeBtn = $('#close');
 
-  //Event Handler
   const openModal = () => {
-    // console.log('open modal function!');
     $modal.css('display', 'block');
   }
 
   const closeModal = () => {
-    // console.log('close modal function!');
     $modal.css('display', 'none');
     lose();
   }
 
-  //Event Listners
   $openBtn.on('click', openModal);
   $closeBtn.on('click', closeModal);
-  // setTimeout(openModal, 5000);
-  // setTimeout(closeModal, 10000);
 
 
-  $('#openModal').hide();
+
   $('#bet5').on('click', bet5);
   $('#bet25').on('click', bet25);
   $('#bet50').on('click', bet50);
@@ -486,7 +489,6 @@ $( () => {
   $('#hit3').on('click', hit3);
   $('#stand2').on('click', stand2);
   $('#stand3').on('click', stand3);
-
 
 
 });
