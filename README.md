@@ -17,7 +17,7 @@ It's a game we know and love. Start with $100 and lose yourself along the way. I
 
 -Player then can place another bet and play another round.
 
--If at any time, the player wants to take out a $100 loan from a cardshark nearby, they can continue playing, even if they were broke.
+-If at any time, the player wants to take out a $100 loan from a cardshark nearby, they can continue playing, even if they are broke.
 
 
 ## Programming path
