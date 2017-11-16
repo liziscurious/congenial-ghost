@@ -43,6 +43,44 @@ $( () => {
   let houseWins = 0;
   let roundWin = 0;
 
+  // Checking for win conditions
+
+  // check for presence of an ace in the the player's hand
+  const checkAcePlayer = () => {
+    // first need to check to see if the score of the hand in question is over 21
+    if (playerScore > 21) {
+      // if hand in question is over 21,
+      console.log(playerScore);
+      for (let i = 0; i < playerHand.length; i++) {
+
+        if (playerHand[i].number === "ace") {
+          // then need to change value of the ace to 1
+          playerScore -= 10;
+          console.log(playerScore);
+        }
+        else {
+          console.log(playerScore);
+        }
+      };
+    };
+  };
+
+  // check for presence of an ace in the the house's hand
+  const checkAceHouse = () => {
+    if (houseScore > 21) {
+      console.log(houseScore);
+      for (let i = 0; i < houseHand.length; i++) {
+        if (houseHand[i].number === "ace") {
+          houseScore -= 10;
+          console.log(houseScore);
+        }
+        else {
+          console.log(houseScore);
+        }
+      };
+    };
+  };
+
   const checkWin = () => {
     console.log('Your score is ' + playerScore + '. House score is ' + houseScore + '.');
     if (houseScore >16 && playerScore === houseScore) {
@@ -85,7 +123,7 @@ $( () => {
       console.log("You bust! House wins! House has ", houseWins, " wins. Player has ", playerWins, " wins.");
       // newHand();
     };
-  }
+  };
 
   // Function for initial deal for each game/ hand
   const deal = () => {
@@ -226,6 +264,7 @@ $( () => {
     $('#stand2').on('click', stand2);
   };
 
+  // second stand function
   const stand2 = () => {
     if (houseScore < 17) {
       houseHand.push(new drawCard());
@@ -250,6 +289,7 @@ $( () => {
     $('#stand2').on('click', stand3);
   };
 
+  // third stand function
   const stand3 = () => {
     if (houseScore <17) {
       houseHand.push(new drawCard());
@@ -294,41 +334,7 @@ $( () => {
 
   }
 
-  // check for presence of an ace in the the player's hand
-  const checkAcePlayer = () => {
-    // first need to check to see if the score of the hand in question is over 21
-    if (playerScore > 21) {
-      // if hand in question is over 21,
-      console.log(playerScore);
-      for (let i = 0; i < playerHand.length; i++) {
 
-        if (playerHand[i].number === "ace") {
-          // then need to change value of the ace to 1
-          playerScore -= 10;
-          console.log(playerScore);
-        }
-        else {
-          console.log(playerScore);
-        }
-      };
-    };
-  };
-
-  // check for presence of an ace in the the house's hand
-  const checkAceHouse = () => {
-    if (houseScore > 21) {
-      console.log(houseScore);
-      for (let i = 0; i < houseHand.length; i++) {
-        if (houseHand[i].number === "ace") {
-          houseScore -= 10;
-          console.log(houseScore);
-        }
-        else {
-          console.log(houseScore);
-        }
-      };
-    };
-  };
 
 
 
