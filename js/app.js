@@ -49,54 +49,72 @@ $( () => {
 
   // Function to place your bets
   const bet5 = () => {
-    wallet -= 5;
-    pot += 5;
+    if (wallet > 0) {
+      wallet -= 5;
+      pot += 5;
+    }
+
 
     $('#wallet').text(wallet);
     $('#pot').text(pot);
-    $('#new-hand').on('click', newHand)
-  }
+    $('#game-status').text(" ")
+  };
+
+  const bet25 = () => {
+    if (wallet > 0) {
+      wallet -= 25;
+      pot += 25;
+    }
+
+
+    $('#wallet').text(wallet);
+    $('#pot').text(pot);
+    $('#game-status').text(" ")
+  };
+
 
   // Function to start new hand
   const newHand = () => {
-    playerScore = 0;
-    houseScore = 0;
-    let playerHand = [];
-    let houseHand = [];
+    if (pot > 0) {
+      playerScore = 0;
+      houseScore = 0;
+      playerHand = [];
+      houseHand = [];
 
-    for(i=0; i < playerHand.length; i++){
-      playerHand.pop(playerHand[i]);
-      console.log(playerHand);
+      // for(i=0; i < playerHand.length; i++){
+      //   playerHand.pop(playerHand[i]);
+      //   console.log(playerHand);
+      // }
+
+      // new hand reorganization with jQuery
+      $('.cardsFaceUp').remove();
+      $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+      $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+
+      $('.btn').hide();
+      const $deal = $('<div>').addClass("btn").addClass("play-action").attr("id", "deal").text("Deal");
+      $('#action-btns').append($deal);
+      const $hit = $('<div>').addClass("btn").addClass("play-action").attr("id", "hit").text("Hit");
+      $('#action-btns').append($hit);
+      const $stand = $('<div>').addClass("btn").addClass("play-action").attr("id", "stand").text("Stand");
+      $('#action-btns').append($stand);
+
+      $('#house-score').text(" ");
+      $('#player-score').text(" ");
+
+      $('#deal').on('click', deal);
+      $('#hit').on('click', hit);
+      $('#stand').on('click', stand);
     }
-
-    // new hand reorganization with jQuery
-    $('.cardsFaceUp').remove();
-    $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
-    $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
-
-    $('.btn').hide();
-    const $deal = $('<div>').addClass("btn").attr("id", "deal").text("Deal");
-    $('#action-btns').append($deal);
-    const $hit = $('<div>').addClass("btn").attr("id", "hit").text("Hit");
-    $('#action-btns').append($hit);
-    const $stand = $('<div>').addClass("btn").attr("id", "stand").text("Stand");
-    $('#action-btns').append($stand);
-
-
-
-    $('#house-score').text(" ");
-    $('#player-score').text(" ");
-
-    $('#deal').on('click', deal);
-    $('#hit').on('click', hit);
-    $('#stand').on('click', stand);
   };
+
 
   // Function for initial deal for each game/ hand
   const deal = () => {
-    if (playerHand.length !== 0) {
-      newHand();
-    }
+    // if (playerHand.length !== 0) {
+    //   newHand();
+    // }
+
     $('.card-back').hide();
     playerHand.push((new drawCard()), (new drawCard()));
     playerScore = (playerHand[0].value + playerHand[1].value);
@@ -319,19 +337,33 @@ $( () => {
     if (houseScore >16 && playerScore === houseScore) {
       console.log("Push!(Draw) Keep your money for now.");
       $('#game-status').text("Push!(Draw) Keep your money for now.");
-      // newHand();
+      wallet += pot;
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
     if (houseScore > 16 && playerScore > houseScore && playerScore <= 21) {
       playerWins += 1;
       console.log("You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
       $('#game-status').text("You win!");
-      // newHand();
+      wallet += (pot * 2);
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
     if (houseScore > 16 && houseScore < 21 && houseScore > playerScore) {
       houseWins += 1;
       console.log("House wins. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
       $('#game-status').text("House wins. Womp womp.");
-      // newHand();
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
   };
 
@@ -340,13 +372,22 @@ $( () => {
       playerWins += 1;
       console.log("Blackjack! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
       $('#game-status').text("Blackjack! You win!");
-      // newHand();
+      wallet += (pot * 2);
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
     if (houseScore == 21 && playerScore < 21) {
       houseWins += 1;
       console.log("House got Blackjack! You lose. Womp womp. House has ", houseWins, " wins. Player has ", playerWins, " wins.");
       $('#game-status').text("House got Blackjack! You lose. Womp womp.");
-      // newHand();
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
   };
 
@@ -355,17 +396,45 @@ $( () => {
       playerWins += 1;
       console.log("House busts! You win! Player has ", playerWins, " wins. House has ", houseWins, " wins.");
       $('#game-status').text("House busts! You win!");
-      // newHand();
+      wallet += (pot * 2);
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
     if (playerScore > 21 && houseScore <= 21) {
       houseWins += 1;
       console.log("You bust! House wins! House has", houseWins, " wins. Player has ", playerWins, " wins.");
       $('#game-status').text("You bust! House wins!");
-      // newHand();
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
     };
   };
 
-  $('#bet5').on('click', bet5);
+  const lose = () => {
+    if (wallet < 1) {
+      alert("You lose.");
+      wallet = 100;
+      pot = 0;
 
+      playerHand = [];
+      houseHand = [];
+      playerScore = 0;
+      houseScore = 0;
+
+      playerWins = 0;
+      houseWins = 0;
+      roundWin = 0;
+      $('#wallet').text(wallet);
+    }
+  };
+
+  $('#bet5').on('click', bet5);
+  $('#bet25').on('click', bet25);
+  $('#new-hand').on('click', newHand)
 
 });
