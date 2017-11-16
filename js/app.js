@@ -110,6 +110,7 @@ $( () => {
       houseHand = [];
 
       // new hand reorganization with jQuery
+      $('#openModal').hide();
       $('.cardsFaceUp').remove();
       $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
       $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
@@ -384,10 +385,10 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-      if (wallet <== 0) {
-        $modal.show();
+      if (wallet = 0) {
+        $('#openModal').show();
       }
-    };
+    }
   };
 
   const checkBlackjack = () => {
@@ -411,8 +412,8 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-      if (wallet <== 0) {
-        $modal.show();
+      if (wallet = 0) {
+        $('#openModal').show();
       }
     };
   };
@@ -429,7 +430,8 @@ $( () => {
       $('.play-action').remove();
       $('#new-hand').show();
     };
-    if (playerScore > 21 && houseScore <= 21) {
+    if (playerScore > 21 && houseScore <= 21)
+    {
       houseWins += 1;
       console.log("You bust! House wins! House has", houseWins, " wins. Player has ", playerWins, " wins.");
       $('#game-status').text("You bust! House wins!");
@@ -438,10 +440,10 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-      if (wallet <== 0) {
-        $modal.show();
-      }
-    };
+      if (wallet = 0) {
+        $('#openModal').show();
+       }
+    }
   };
 
   const lose = () => {
@@ -466,11 +468,11 @@ $( () => {
   const $closeBtn = $('#close');
 
   const openModal = () => {
-    $modal.css('display', 'block');
+    $("#modal").css('display', 'block');
   }
 
   const closeModal = () => {
-    $modal.css('display', 'none');
+    $("#modal").css('display', 'none');
     lose();
   }
 
