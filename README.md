@@ -21,3 +21,15 @@ It's a game we know and love. Start with $100 and lose yourself along the way. I
 
 
 ## Programming path
+
+-I decided that since blackjack in casinos is played with at least six decks, using randomization in the constructor would be sufficient for the game play.
+
+-Each hit and stand function is unique to the hand, so that the same cards are not pushed into the player and house hands at the same time.
+
+-Hands are checked for the presence of aces when they are check to see if either player has busted. If an ace is present, the hand score is adjusted to allow that player to continue. This was an interesting challenge due to scope issues to have the score carry over.
+
+-Cards and available actions within a hand are reset when new bets are placed after a hand has ended.
+
+### Two game resets are present.
+-Once a hand is over, new bets can be placed and the player can play another hand.
+-If the player has lost all their money, they can take out a loan to continue playing.
