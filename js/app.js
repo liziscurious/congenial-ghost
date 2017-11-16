@@ -98,6 +98,7 @@ $( () => {
     let $playerImg1 = $('<img>').attr('src', playerHand[0].image).addClass("cardsFaceUp");
     let $playerImg2 = $('<img>').attr('src', playerHand[1].image).addClass("cardsFaceUp");
     console.log('Your score is ', playerScore);
+
     houseHand.push((new drawCard()), (new drawCard()));
     houseScore = (houseHand[0].value + houseHand[1].value);
     let $houseImg1 = $('<img>').attr('src', houseHand[0].image).addClass("cardsFaceUp");
@@ -136,10 +137,10 @@ $( () => {
 
     $('#hit2').on('click', hit2);
 
-    checkAce(playerScore, playerHand);
-    checkAce(houseScore, houseHand);
-    // checkBlackjack();
-    // checkBust();
+    checkAcePlayer();
+    checkAceHouse();
+    checkBlackjack();
+    checkBust();
   };
 
   // drawing fourth card every time playerHand is under 21.
@@ -166,10 +167,10 @@ $( () => {
 
     $('#hit3').on('click', hit3);
 
-    checkAce(playerScore, playerHand);
-    checkAce(houseScore, houseHand);
-    // checkBlackjack();
-    // checkBust();
+    checkAcePlayer();
+    checkAceHouse();
+    checkBlackjack();
+    checkBust();
   };
 
   // drawing fifth card every time playerHand is under 21.
@@ -190,10 +191,10 @@ $( () => {
       console.log('new house card is ', houseHand[2].value, ' house score is ', houseScore);
     };
 
-    checkAce(playerScore, playerHand);
-    checkAce(houseScore, houseHand);
-    // checkBlackjack();
-    // checkBust();
+    checkAcePlayer();
+    checkAceHouse();
+    checkBlackjack();
+    checkBust();
   };
 
 
@@ -212,12 +213,11 @@ $( () => {
     let $stand2Div = $('<div>').addClass('btn').attr('id', 'stand2').text('Stand');
     $('#action-btns').append($stand2Div);
 
-    checkAce(playerScore, playerHand);
-    checkAce(houseScore, houseHand);
-
-    // checkWin();
-    // checkBlackjack();
-    // checkBust();
+    checkAcePlayer();
+    checkAceHouse();
+    checkWin();
+    checkBlackjack();
+    checkBust();
 
     $('#stand2').on('click', stand2);
   };
@@ -236,13 +236,11 @@ $( () => {
     let $stand3Div = $('<div>').addClass('btn').attr('id', 'stand3').text('Stand');
     $('#action-btns').append($stand3Div);
 
-
-    checkAce(playerScore, playerHand);
-    checkAce(houseScore, houseHand);
-
-    // checkWin();
-    // checkBlackjack();
-    // checkBust();
+    checkAcePlayer();
+    checkAceHouse();
+    checkWin();
+    checkBlackjack();
+    checkBust();
 
     $('#stand2').on('click', stand3);
   };
@@ -257,12 +255,11 @@ $( () => {
       $('#house-score').text(houseScore);
     };
 
-    checkAce(playerScore, playerHand);
-    checkAce(houseScore, houseHand);
-
-    // checkWin();
-    // checkBlackjack();
-    // checkBust();
+    checkAcePlayer();
+    checkAceHouse();
+    checkWin();
+    checkBlackjack();
+    checkBust();
   };
 
 
@@ -272,42 +269,61 @@ $( () => {
     let playerHand = [];
     let houseHand = [];
 
+    for(i=0; i < playerHand.length; i++){
+      playerHand.pop(playerHand[i]);
+      console.log(playerHand);
+    }
+
+
     $('.cardsFaceUp').remove();
     $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
     $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
+
+    $('#action-btns').empty();
+    const $hit = $('<div>').addClass("btn").attr("id", "btn").text("hit");
+    $('#action-btns').append($hit);
 
     $('#house-score').text(" ");
     $('#player-score').text(" ");
 
   }
 
-
-  // check for presence of an ace in the the hand
-  const checkAce = (currentScore, currentArray) => {
+  // check for presence of an ace in the the player's hand
+  const checkAcePlayer = () => {
     // first need to check to see if the score of the hand in question is over 21
-    if (currentScore > 21) {
+    if (playerScore > 21) {
       // if hand in question is over 21,
-      console.log(currentScore);
-      for (let i = 0; i < currentArray.length; i++) {
+      console.log(playerScore);
+      for (let i = 0; i < playerHand.length; i++) {
 
-        if (currentArray[i].number === "ace") {
+        if (playerHand[i].number === "ace") {
           // then need to change value of the ace to 1
-          currentScore -= 10;
-          console.log(currentScore);
-          checkBust();
-          checkBlackjack();
-          checkWin();
+          playerScore -= 10;
+          console.log(playerScore);
         }
         else {
-          // console.log(currentScore);
-          // checkBust();
-          // checkBlackjack();
-          // checkWin();
+          console.log(playerScore);
         }
       };
-
     };
   };
+
+  // check for presence of an ace in the the house's hand
+  const checkAceHouse = () => {
+    if (houseScore > 21) {
+      console.log(houseScore);
+      for (let i = 0; i < houseHand.length; i++) {
+        if (houseHand[i].number === "ace") {
+          houseScore -= 10;
+          console.log(houseScore);
+        }
+        else {
+          console.log(houseScore);
+        }
+      };
+    };
+  };
+
 
 
   $('#deal').on('click', deal);
