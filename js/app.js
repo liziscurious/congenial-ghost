@@ -428,8 +428,7 @@ $( () => {
       $('.play-action').remove();
       $('#new-hand').show();
     };
-    if (playerScore > 21 && houseScore <= 21)
-    {
+    if (playerScore > 21 && houseScore <= 21) {
       houseWins += 1;
       console.log("You bust! House wins! House has", houseWins, " wins. Player has ", playerWins, " wins.");
       $('#game-status').text("You bust! House wins!");
@@ -438,7 +437,17 @@ $( () => {
       $('#pot').text(pot);
       $('.play-action').remove();
       $('#new-hand').show();
-    }
+    };
+    if (houseScore > 21 && playerScore >21) {
+      console.log("Everyone busts! Push!(Draw) Keep your money for now.");
+      $('#game-status').text("Everyone busts! Push!(Draw) Keep your money for now.");
+      wallet += pot;
+      pot = 0;
+      $('#wallet').text(wallet);
+      $('#pot').text(pot);
+      $('.play-action').remove();
+      $('#new-hand').show();
+    };
   };
 
   const lose = () => {
