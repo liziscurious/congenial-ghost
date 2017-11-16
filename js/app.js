@@ -111,7 +111,7 @@ $( () => {
       houseHand = [];
 
       // new hand reorganization with jQuery
-      $('#openModal').hide();
+      // $('#openModal').hide();
       $('.cardsFaceUp').remove();
       $('#house-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
       $('#player-cards').append($('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'), $('<img>').attr('src', 'images/Card-Back-04.png').addClass('card-back'));
